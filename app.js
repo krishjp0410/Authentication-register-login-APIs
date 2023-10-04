@@ -36,7 +36,7 @@ app.post("/register", async (request, response) => {
     FROM 
       user 
     WHERE 
-      username = ${username};`;
+      username = '${username}';`;
   const dbUser = await database.get(selectUserQuery);
   if (dbUser === undefined) {
     if (password.length < 5) {
@@ -70,11 +70,11 @@ app.post("/login", async (request, response) => {
     FROM 
       user 
     WHERE 
-      username = ${username};`;
+      username = '${username}';`;
   const dbUser = await database.get(selectUserQuery);
   if (dbUser === undefined) {
     response.status(400);
-    response.send("Invalid User");
+    response.send("Invalid user");
   } else {
     const isPasswordMatched = await bcrypt.compare(password, dbUser.password);
     if (isPasswordMatched) {
@@ -95,7 +95,7 @@ app.put("/change-password", async (request, response) => {
     FROM 
       user 
     WHERE 
-      username = ${username};`;
+      username = '${username}';`;
   const dbUser = await database.get(selectUserQuery);
   if (dbUser === undefined) {
     response.status(400);
